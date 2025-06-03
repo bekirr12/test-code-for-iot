@@ -1,7 +1,7 @@
 #include "src/Twin/Twin.h"
 #include <WiFi.h>
-#include <HTTPClient.h>
-#include <UrlEncode.h>
+// #include <HTTPClient.h>
+// #include <UrlEncode.h>
 
 
 // define ble channel
@@ -15,8 +15,8 @@ BLECharacteristic* pCharacteristic = nullptr;
 
 bool deviceConnected =false ;
 
-String phoneNumber = "+905312892096";
-String apiKey = "2542756";
+// String phoneNumber = "+905312892096";
+// String apiKey = "2542756";
 
 const char* ssid = "FiberHGW_TPB4AE";
 const char* password = "bekiradamerkanadam";
@@ -166,6 +166,7 @@ void digitalWrite_F(){
     pinMode(pin, OUTPUT);
     uint8_t value = bleChannel.received.message_data[1];
     digitalWrite(pin, value);
+    /*
     if (value == 0x00){
       sendMessage("Led off!");
     } else if (value == 0XFF){
@@ -173,7 +174,7 @@ void digitalWrite_F(){
     } else {
       sendMessage("unknown characters");
     }
-
+    */
     bleChannel.sent.message_length = 1;
     uint8_t response_data[1] = {1};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     memcpy(bleChannel.sent.message_data, response_data, bleChannel.sent.message_length);
@@ -310,7 +311,7 @@ void wifiConfig_F() {
   memcpy(bleChannel.sent.message_data, payload, 4);
 }
 */
-
+/*
 void sendMessage(String message){
 
   // Data to send with HTTP POST
@@ -335,7 +336,7 @@ void sendMessage(String message){
   // Free resources
   http.end();
 }
-
+*/
 
 void applyCommands(){  
     switch (bleChannel.received.message_id)

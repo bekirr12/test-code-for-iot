@@ -3,6 +3,7 @@
 // #include <HTTPClient.h>
 // #include <UrlEncode.h>
 
+#include <WiFiClientSecure.h>
 #include <UniversalTelegramBot.h>
 #include <ArduinoJson.h>
 
@@ -21,8 +22,8 @@ bool deviceConnected =false ;
 // String phoneNumber = "+905312892096";
 // String apiKey = "2542756";
 
-const char* ssid = "FiberHGW_TPB4AE";
-const char* password = "bekiradamerkanadam";
+const char* ssid = "TurkTelekom_TC8D8";
+const char* password = "N0HsaAXZ";
 
 #define BOTtoken "7852032670:AAFUcDOpYBzeu_2UC7MatDCMBCkVWnnPnyo"
 #define CHAT_ID "7333542926"

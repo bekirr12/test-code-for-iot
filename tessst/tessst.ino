@@ -3,6 +3,9 @@
 // #include <HTTPClient.h>
 // #include <UrlEncode.h>
 
+#include <UniversalTelegramBot.h>
+#include <ArduinoJson.h>
+
 
 // define ble channel
 channel_st bleChannel;
@@ -20,6 +23,13 @@ bool deviceConnected =false ;
 
 const char* ssid = "FiberHGW_TPB4AE";
 const char* password = "bekiradamerkanadam";
+
+#define BOTtoken "7852032670:AAFUcDOpYBzeu_2UC7MatDCMBCkVWnnPnyo"
+#define CHAT_ID "7333542926"
+
+WiFiClientSecure client;
+UniversalTelegramBot bot(BOTtoken, client);
+
 
 // Command structure example (modify as needed)
 struct Command {
@@ -88,6 +98,9 @@ void setup() {
   } else {
     Serial.println("\nWiFi bağlantısı başarısız.");
   }
+
+  client.setCACert(TELEGRAM_CERTIFICATE_ROOT); // Add root certificate for api.telegram.org
+  bot.sendMessage(CHAT_ID, "Bot started up", "");
  
   // Create BLE queue
   bleQueue = xQueueCreate(QUEUE_LENGTH, sizeof(Command));
@@ -175,6 +188,15 @@ void digitalWrite_F(){
       sendMessage("unknown characters");
     }
     */
+
+    if (value == 0x00){
+      bot.sendMessage(CHAT_ID, "Led off!");
+    } else if (value == 0XFF){
+      bot.sendMessage(CHAT_ID, "Led open!");
+    } else {
+      bot.sendMessage(CHAT_ID, "Unknown characters!");
+    }
+
     bleChannel.sent.message_length = 1;
     uint8_t response_data[1] = {1};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     memcpy(bleChannel.sent.message_data, response_data, bleChannel.sent.message_length);
